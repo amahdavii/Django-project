@@ -14,3 +14,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length = 60, choices = STATUS_CHOICES, default = 'draft')
+
+
+    def __str__(self):
+        return "Post object (id = {} & title = {})".format(self.id, self.title)
