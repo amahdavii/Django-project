@@ -1,3 +1,4 @@
+from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Post
@@ -9,4 +10,5 @@ def index(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
-    return HttpResponse("You are looking at post {}".format(post))
+    template = loader.get_template('detail.html')
+    return HttpResponse(template.render())
