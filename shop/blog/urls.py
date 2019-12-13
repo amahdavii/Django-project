@@ -1,5 +1,9 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, register_converter
 from . import views
+from extensions import converters
+
+register_converter(converters.FourDigitYearConverter, 'yyyy')
+
 
 app_name = 'blog'
 urlpatterns = [
@@ -8,5 +12,5 @@ urlpatterns = [
 
     #ex: hostname/blog/5
     path('<int:post_id>', views.detail, name = 'detail'),
-    re_path(r'^archive/(?P<year>[0-9]{4})/$', views.archive_year, name = 'archive')
+    path('archive/<yyyy:year>/', views.archive_year, name = 'archive')
 ]
