@@ -5,10 +5,17 @@ from .models import Post
 # Create your views here.
 def index(request):
     latest_posts_list = Post.objects.order_by('-published')[:5]
-    output = ", \n".join([p.slug for p in latest_posts_list])
-    return HttpResponse(output)
-
+    #output = ", \n".join([p.slug for p in latest_posts_list])
+    template = loader.get_template('index.html')
+    context = {
+        'latest_posts_list': latest_posts_list,
+    }
+    return HttpResponse(template.render(context, request))
+    
 def detail(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     template = loader.get_template('detail.html')
-    return HttpResponse(template.render())
+    context = {
+        'post': post,
+    }
+    return HttpResponse(template.render(context, request))
