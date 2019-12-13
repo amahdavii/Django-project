@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 app_name = 'blog'
@@ -8,5 +8,5 @@ urlpatterns = [
 
     #ex: hostname/blog/5
     path('<int:post_id>', views.detail, name = 'detail'),
-    path('archive/<int:year>/', views.archive_year, name = 'archive')
+    re_path(r'^archive/(?P<year>[0-9]{4})/$', views.archive_year, name = 'archive')
 ]
