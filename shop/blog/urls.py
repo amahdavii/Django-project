@@ -8,4 +8,5 @@ urlpatterns = [
 
     #ex: hostname/blog/5
     path('<int:post_id>', views.detail, name = 'detail'),
+    path('archive/<int:year>/', views.archive_year, name = 'archive')
 ]

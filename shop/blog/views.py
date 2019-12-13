@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from .models import Post
@@ -15,3 +16,11 @@ def detail(request, post_id):
         'post': post,
     }
     return render(request, 'detail.html', context)
+
+def archive_year(request, year):
+    year_archive_posts = Post.objects.filter(published__year = year)
+    context = {
+        'year_archive_posts': year_archive_posts,
+    }
+
+    return render(request, 'archive.html', context)
