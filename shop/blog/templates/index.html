@@ -1,5 +1,11 @@
 {% extends "parent/main.html" %}
+
+{% block title %}
+    {{ super }} Blog
+{% endblock %}
+
 {% block body %}
+    {% include "partials/carousel.html" %}
     <h1>All posts</h1>
     {% if latest_posts_list %}
         <ul>
